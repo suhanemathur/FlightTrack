@@ -1,0 +1,5 @@
+New York,550,Required
+London,720,Not Required
+Dubai,430,Required
+Mumbai,600,Not Required
+Sydney,1200,Required

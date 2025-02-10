@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FlightTrack</string>
+    <string name="btn_next_stop">Next Stop</string>
+    <string name="btn_toggle_distance">Toggle Distance</string>
+    <string name="progress_text">Progress: 0%</string>
+    <string name="distance_format">Distance: %1$.2f %2$s</string>
+    <string name="visa_format">Visa: %1$s</string>
+    <string name="welcome_message">Welcome!</string>
+    <string name="weather_info">Fetching weather...</string>
+
+</resources>
