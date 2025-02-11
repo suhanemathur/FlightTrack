@@ -1,68 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Assignment 1:FlightTrack App - Project Documentation</title>
-</head>
-<body>
-    <h1>FlightTrack App - Project Documentation</h1>
-    
-    <h2>Introduction</h2>
-    <p>The FlightTrack app is designed to help users track airplane journeys across multiple stops, providing information on distances, visa requirements, and progress tracking. The project includes two implementations:</p>
-    <ul>
-        <li><strong>Version 1:</strong> XML + Kotlin (Traditional UI)</li>
-        <li><strong>Version 2:</strong> Jetpack Compose (Modern UI)</li>
-    </ul>
-    
-    <h2>Features Implemented</h2>
-    <h3>Text Display (Traditional and Lazy Column)</h3>
-    <p>Both versions display stops using appropriate methods:</p>
-    <ul>
-        <li><strong>XML Version:</strong> Uses RecyclerView to list stops.</li>
-        <li><strong>Jetpack Compose Version:</strong> Uses LazyColumn for efficient rendering.</li>
-    </ul>
-    
-    <h3>Buttons & Unit Conversion</h3>
-    <p>The app includes buttons for functionality:</p>
-    <ul>
-        <li><strong>Toggle Button:</strong> Converts distances between kilometers and miles.</li>
-        <li><strong>Next Stop Button:</strong> Moves to the next destination.</li>
-        <li><strong>Restart Button:</strong> Resets the journey.</li>
-    </ul>
-    
-    <h3>User Interface & ProgressBar</h3>
-    <p>The UI elements ensure a smooth experience:</p>
-    <ul>
-        <li>Displays the current stop, total distance, and remaining distance.</li>
-        <li>ProgressBar dynamically updates based on journey progress.</li>
-        <li>Fact box provides interesting information about each stop.</li>
-    </ul>
-    
-    <h2>Implementation Details</h2>
-    <h3>Version 1: XML + Kotlin</h3>
-    <p>This version follows a traditional UI approach:</p>
-    <ul>
-        <li>RecyclerView for displaying stops.</li>
-        <li>Buttons and text views defined in XML.</li>
-        <li>ProgressBar updates based on the current stop.</li>
-    </ul>
-    
-    <h3>Version 2: Jetpack Compose</h3>
-    <p>This version is implemented using modern UI techniques:</p>
-    <ul>
-        <li>LazyColumn for efficient list rendering.</li>
-        <li>Composable functions for modular UI components.</li>
-        <li>State management using remember and mutableStateOf.</li>
-    </ul>
-    
-    <h2>How to Run the Project</h2>
-    <ol>
-        <li>Clone the GitHub repository to your local machine.</li>
-        <li>Open the project in Android Studio.</li>
-        <li>Select the desired version (XML or Jetpack Compose).</li>
-        <li>Build and run the app on an emulator or a real device.</li>
-    </ol>
-    
-    <h2>Conclusion</h2>
-    <p>This project successfully demonstrates both XML and Jetpack Compose UI implementations, ensuring compatibility and a smooth user experience. It covers key Android development concepts, including state management, UI components, and data handling.</p>
-</body>
-</html>
+# Mobile computing Assignment 1: FlightTrack App
+
+## Overview
+FlightTrack is an Android application that will help users track their airplane journey across multiple stops. The app provides details such as distance traveled, remaining distance, visa requirements, current weather conditions and additional facts about each stop. It also includes a unit conversion feature (km ↔ miles) and allows users to mark progress as they reach each stop.
+
+This project has been implemented in two versions:
+1.Version 1 - Developed using XML + Kotlin 
+2.Version 2 - Developed using Jetpack Compose
+
+## Features
+### Common Features in Both Versions
+- Displays a list of stops (City name, distance, and visa requirement).
+- Unit conversion between km and miles.
+- Progress tracking with a ProgressBar.
+- "Next Stop" button to update the journey progress.
+- A text box for additional travel facts and places recommended.
+- Current Weather conditions of the location you are in using OpenWeatherMap API
+- Data is loaded from a resource file (`stops.txt`).
+- A `Restart Journey` button to reset progress.
+- Greeting message based on the time of day.
+
+
+### Version 1: XML + Kotlin
+- Uses RecyclerView to display the list of stops.
+- Implements UI using XML layouts.
+- Uses `ProgressBar` for progress visualization.
+- Standard Android Views (`TextView`, `Button`, `LinearLayout`).
+
+### Version 2: Jetpack Compose
+- Uses LazyColumn for dynamic lists.
+- Implements UI using Composables (`Text`, `Column`, `Button`, `ProgressBar`).
+- Uses State Management (`remember`) to update UI dynamically.
+- Implements a fully declarative UI with Jetpack Compose.
+
+---
+
+## Implementation Details
+
+### Data Handling
+- Stops data (`stops.txt`) is read using a helper utility (`Utils.loadStopsFromResource()`).
+- The data is parsed and stored in a List of Stop objects.
+- Each stop contains:
+  - `name`: City name
+  - `distanceKm`: Distance from the previous stop
+  - `visaRequired`: Boolean value indicating visa necessity
+
+### Text Display
+- XML Version: Uses `TextView` inside a `RecyclerView` item.
+- Compose Version: Uses `Text()` inside `LazyColumn`.
+
+### Distance Conversion
+- A toggle button allows switching between km and miles.
+- Uses a helper function:  
+  ```kotlin
+  fun kmToMiles(km: Int): Int {
+      return (km * 0.621371).toInt()
+  }
+
+### Weather Updates
+- The app fetches real-time weather data for the current location using the API pf OpenWeatherMap.
+- The weather details (temperature & conditions) are displayed in the greeting box.
+- Implemented using:
+  ```kotlin
+  fun fetchWeather(city: String) {
+      // API Call to fetch weather for 'city'
+  }
+
+### Fun Facts Display
+- A small box below the stops shows:
+- A fun fact about the city.
+- 2 recommended places to visit.
+Facts are stored in a Map inside MainActivity
+
+### Greeting
+- The app greets the user with a "Good Morning", "Good Afternoon", or "Good Evening" message based on the current system time.
+
+
