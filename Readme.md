@@ -44,6 +44,36 @@ This project has been implemented in two versions:
   - `distanceKm`: Distance from the previous stop
   - `visaRequired`: Boolean value indicating visa necessity
 
+### Progress Bar Implementation
+The app includes a LinearProgressIndicator to visually represent the journey progress.
+
+- Calculation:
+    -The total journey distance is calculated from the sum of all stop distances.
+- The covered distance is dynamically updated based on the current stop.
+-The progress is determined by the formula:
+    progress = coveredDistance.toFloat() / totalDistance.toFloat()
+
+Jetpack Compose Implementation:
+LinearProgressIndicator(
+    progress = coveredDistance.toFloat() / totalDistance.toFloat(),
+    modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 8.dp)
+)
+
+XML Implementation:
+<ProgressBar
+    android:id="@+id/progressBar"
+    style="@android:style/Widget.ProgressBar.Horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:progress="50"
+    android:max="100"/>
+
+-Dynamic Update:
+    -As the user reaches the next stop, the progress bar updates accordingly.
+    -When the journey is complete, it shows 100% progress.
+
 ### Text Display
 - XML Version: Uses `TextView` inside a `RecyclerView` item.
 - Compose Version: Uses `Text()` inside `LazyColumn`.
