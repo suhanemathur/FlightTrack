@@ -54,12 +54,13 @@ The app includes a LinearProgressIndicator to visually represent the journey pro
     progress = coveredDistance.toFloat() / totalDistance.toFloat()
 
 Jetpack Compose Implementation:
-LinearProgressIndicator(
+ ```kotlin
+ LinearProgressIndicator(
     progress = coveredDistance.toFloat() / totalDistance.toFloat(),
     modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 8.dp)
-)
+ )
 
 XML Implementation:
 <ProgressBar
