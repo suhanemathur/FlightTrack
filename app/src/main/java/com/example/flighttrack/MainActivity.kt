@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize UI elements
         val distanceToggle = findViewById<Button>(R.id.btnToggleDistance)
         val nextStopButton = findViewById<Button>(R.id.btnNextStop)
         val restartButton = findViewById<Button>(R.id.btnRestart)
@@ -65,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         val factText = findViewById<TextView>(R.id.tvFact)
         val buttonContainer = findViewById<LinearLayout>(R.id.buttonContainer)
 
-        // Load stops from resources
         stops = Utils.loadStopsFromResource(this, R.raw.stops)
 
         if (stops.isNotEmpty()) {
@@ -79,24 +77,20 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = stopAdapter
 
-        // Set dynamic welcome message
         setWelcomeMessage(welcomeText)
 
-        // Fetch initial weather for the first stop
         if (stops.isNotEmpty()) {
             fetchWeather(weatherText, stops[currentStopIndex].name)
         } else {
             weatherText.text = "No stops available"
         }
 
-        // Handle distance unit toggle
         distanceToggle.setOnClickListener {
             useMiles = !useMiles
             stopAdapter.updateUnit(useMiles)
             updateProgress(progressText, progressBar)
         }
 
-        // Handle next stop button
         nextStopButton.setOnClickListener {
             if (currentStopIndex < stops.size - 1) {
                 currentStopIndex++
@@ -106,14 +100,12 @@ class MainActivity : AppCompatActivity() {
                 updateFact(factText, stops[currentStopIndex].name)
             }
 
-            // If last stop reached, disable button
             if (currentStopIndex == stops.size - 1) {
                 nextStopButton.isEnabled = false
                 nextStopButton.text = "Journey Completed"
             }
         }
 
-        // Handle restart button
         restartButton.setOnClickListener {
             currentStopIndex = 0
             stopAdapter.updateCurrentStop(currentStopIndex)
@@ -124,10 +116,8 @@ class MainActivity : AppCompatActivity() {
             updateFact(factText, stops[currentStopIndex].name)
         }
 
-        // Initialize progress tracking
         updateProgress(progressText, progressBar)
 
-        // Ensure buttons are centered below destinations
         buttonContainer.bringToFront()
     }
 
@@ -135,7 +125,6 @@ class MainActivity : AppCompatActivity() {
         val totalDistance = stops.sumOf { it.distanceKm }
         var coveredDistance = stops.take(currentStopIndex).sumOf { it.distanceKm }
 
-        // If the journey has ended, set coveredDistance to totalDistance
         if (currentStopIndex >= stops.size - 1) {
             coveredDistance = totalDistance
         }
@@ -148,7 +137,6 @@ class MainActivity : AppCompatActivity() {
 
         progressText.text = "Covered: $coveredDisplay $unit | Left: $remainingDisplay $unit"
 
-        // Ensure progress bar reaches 100% when journey ends
         updateProgressBar(progressBar, coveredDistance, totalDistance)
     }
 
@@ -183,7 +171,6 @@ class MainActivity : AppCompatActivity() {
     private fun fetchWeather(weatherText: TextView, location: String) {
         val apiKey = "64a152de095d26616fa6126b62cd0e5a"
 
-        // Ensure proper city format
         val formattedLocation = location.trim()
         val url = "https://api.openweathermap.org/data/2.5/weather?q=$formattedLocation&appid=$apiKey&units=metric"
 
