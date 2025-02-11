@@ -62,13 +62,13 @@ This project has been implemented in two versions:
 - Implemented using:
   ```kotlin
   fun fetchWeather(city: String) {
-      // API Call to fetch weather for 'city'
+      ...
   }
 
 ### Fun Facts Display
 - A small box below the stops shows:
-- A fun fact about the city.
-- 2 recommended places to visit.
+    - A fun fact about the city.
+    - 2 recommended places to visit.
 Facts are stored in a Map inside MainActivity
 
 ### Greeting
